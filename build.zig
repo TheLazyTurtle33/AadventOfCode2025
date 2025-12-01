@@ -19,12 +19,10 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = std.fmt.allocPrint(b.allocator, "day{d:0>2}", .{day}) catch @panic("OOM"),
-        .root_module = b.createModule(.{
-            .root_source_file = b.path(std.fs.path.join(b.allocator, &.{ folder, "main.zig" }) catch @panic("OOM")),
+        .root_source_file = b.path(std.fs.path.join(b.allocator, &.{ folder, "main.zig" }) catch @panic("OOM")),
 
-            .target = b.standardTargetOptions(.{}),
-            .optimize = b.standardOptimizeOption(.{}),
-        }),
+        .target = b.standardTargetOptions(.{}),
+        .optimize = b.standardOptimizeOption(.{}),
     });
 
     b.installArtifact(exe);
